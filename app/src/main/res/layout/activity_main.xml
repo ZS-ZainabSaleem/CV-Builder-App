@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- White Background for Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="16dp"
+        android:layout_weight="0"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CV Builder"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#5F36A8"
+            android:gravity="center"/>
+    </LinearLayout>
+    <!-- Purple Background -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5F36A8"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="7"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Picture"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnDetails"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Personal Details"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnSummary"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Summary"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnEducation"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Education"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnExperience"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Experience"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnCertifications"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Certifications"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+            />
+        <Button
+            android:id="@+id/btnReferences"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="References"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"
+
+            />
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+
+            android:buttonTint="@android:color/transparent"
+            android:background="@drawable/button_bg"/>
+    </LinearLayout>
+
+
+</LinearLayout>
