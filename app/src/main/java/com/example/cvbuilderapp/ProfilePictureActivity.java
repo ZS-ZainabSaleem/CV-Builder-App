@@ -34,7 +34,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile_picture);
         init();
-        loadSavedImage(); // Load previously saved image if available
+        //loadSavedImage(); // Load previously saved image if available
         fabSetProfilePic.setOnClickListener((v)->{
             Intent i = new Intent(Intent.ACTION_PICK);
             i.setType("image/*");
@@ -65,15 +65,12 @@ public class ProfilePictureActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         getImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                (result)->{
-                    if(result.getResultCode() == RESULT_OK && result.getData()!=null)
-                    {
-                        Uri image = result.getData().getData();
-                        iv_ProfilePicture.setImageURI(image);
-                    }
-                    else
-                    {
-                        Toast.makeText(this, "Select the image", Toast.LENGTH_SHORT).show();
+                (result) -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        selectedImageUri = result.getData().getData(); // Update selectedImageUri
+                        iv_ProfilePicture.setImageURI(selectedImageUri);
+                    } else {
+                        Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -85,7 +82,12 @@ public class ProfilePictureActivity extends AppCompatActivity {
     private void loadSavedImage() {
         String savedImageUri = sharedPreferences.getString(PROFILE_PIC_KEY, "");
         if (!savedImageUri.isEmpty()) {
-            iv_ProfilePicture.setImageURI(Uri.parse(savedImageUri));
+            try {
+                Uri uri = Uri.parse(savedImageUri);
+                iv_ProfilePicture.setImageURI(uri);
+            } catch (Exception e) {
+                Toast.makeText(this, "Failed to load saved image", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

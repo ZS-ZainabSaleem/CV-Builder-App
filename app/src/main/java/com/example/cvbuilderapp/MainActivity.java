@@ -1,5 +1,6 @@
 package com.example.cvbuilderapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,11 +14,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnProfile, btnDetails, btnSummary, btnEducation, btnExperience, btnCertifications,
             btnReferences,btnSubmit;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        //clearSharedPreferences();
         init();
         btnProfile.setOnClickListener((v)->{
             Intent intent = new Intent(MainActivity.this, ProfilePictureActivity.class);
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, PreviewActivity.class);
             startActivity(intent);
         });
+    }
+    private void clearSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("CVData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear(); // ✅ Clears all saved data
+        editor.apply();
     }
     private void init()
     {

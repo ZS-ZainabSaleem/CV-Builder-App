@@ -49,33 +49,30 @@ public class ReferencesActivity extends AppCompatActivity {
         } else {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            // Save as formatted string
-            String referenceDetails = "Name: " + refName + "\n" +
-                    "Organization: " + organization + "\n" +
-                    "Job Title: " + jobTitle;
-
-            editor.putString("reference", referenceDetails);
+            // Save each field separately
+            editor.putString("reference_name", refName);
+            editor.putString("reference_org", organization);
+            editor.putString("reference_job", jobTitle);
             editor.apply();
 
-            Log.d("ReferencesActivity", "Saved Reference: " + referenceDetails);
+            Log.d("ReferencesActivity", "Saved Reference: " + refName + ", " + organization + ", " + jobTitle);
             Toast.makeText(this, "Reference saved successfully!", Toast.LENGTH_SHORT).show();
 
             // Redirect to MainActivity
-            Intent intent = new Intent(ReferencesActivity.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(ReferencesActivity.this, MainActivity.class));
             finish();
         }
     }
     private void loadReferenceData() {
-        String reference = sharedPreferences.getString("reference", "");
+        // Retrieve saved values separately
+        String refName = sharedPreferences.getString("reference_name", "");
+        String organization = sharedPreferences.getString("reference_org", "");
+        String jobTitle = sharedPreferences.getString("reference_job", "");
 
-        if (!reference.isEmpty()) {
-            String[] parts = reference.split("\n");
-            if (parts.length == 3) {
-                et_refName.setText(parts[0].replace("Name: ", ""));
-                etref_org.setText(parts[1].replace("Organization: ", ""));
-                etref_job.setText(parts[2].replace("Job Title: ", ""));
-            }
+        if (!refName.isEmpty() || !organization.isEmpty() || !jobTitle.isEmpty()) {
+            et_refName.setText(refName);
+            etref_org.setText(organization);
+            etref_job.setText(jobTitle);
         }
     }
     private void clearAllFields()
@@ -83,6 +80,10 @@ public class ReferencesActivity extends AppCompatActivity {
         et_refName.setText("");
         etref_job.setText("");
         etref_org.setText("");
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("reference");
+        editor.apply();
     }
     private void init()
     {

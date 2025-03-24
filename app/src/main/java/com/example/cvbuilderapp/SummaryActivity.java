@@ -36,12 +36,19 @@ public class SummaryActivity extends AppCompatActivity {
         });
     }
     private void saveSummary() {
+        String summary=etSummary.getText().toString().trim();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("summary", etSummary.getText().toString().trim());
-        editor.apply();
-        Toast.makeText(this, "Summary saved!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(SummaryActivity.this, MainActivity.class));
-        finish();
+        if(summary.isEmpty())
+        {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        }
+         else {
+            editor.apply();
+            Toast.makeText(this, "Summary saved!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SummaryActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     private void loadSummary() {
@@ -50,6 +57,9 @@ public class SummaryActivity extends AppCompatActivity {
     private void clearAllFields()
     {
         etSummary.setText("");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("summary");
+        editor.apply();
     }
     private void init()
     {

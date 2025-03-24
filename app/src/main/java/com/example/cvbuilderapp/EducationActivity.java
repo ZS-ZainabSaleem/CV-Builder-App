@@ -49,34 +49,29 @@ public class EducationActivity extends AppCompatActivity {
         } else {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            // Save education as a single formatted string for FinalActivity
-            String educationDetails = "Degree: " + degree + "\n" +
-                    "University: " + university + "\n" +
-                    "Year of Graduation: " + year;
-
-            editor.putString("education", educationDetails);
+            // Save fields separately
+            editor.putString("education_degree", degree);
+            editor.putString("education_university", university);
+            editor.putString("education_year", year);
             editor.apply();
 
-            Log.d("EducationActivity", "Saved Education: " + educationDetails);
+            Log.d("EducationActivity", "Saved Education: " + degree + ", " + university + ", " + year);
             Toast.makeText(this, "Education saved successfully!", Toast.LENGTH_SHORT).show();
 
-            // Redirect to FinalActivity
-            Intent intent = new Intent(EducationActivity.this, MainActivity.class);
+            // Redirect to PreviewActivity
+            Intent intent = new Intent(EducationActivity.this, PreviewActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
     private void loadEducationData() {
-        String education = sharedPreferences.getString("education", "");
-
-        if (!education.isEmpty()) {
-            String[] parts = education.split("\n");
-            if (parts.length == 3) {
-                etDegree.setText(parts[0].replace("Degree: ", ""));
-                etUniversity.setText(parts[1].replace("University: ", ""));
-                etYear.setText(parts[2].replace("Year of Graduation: ", ""));
-            }
+        if (etDegree != null && etUniversity != null && etYear != null) {
+            etDegree.setText(sharedPreferences.getString("education_degree", ""));
+            etUniversity.setText(sharedPreferences.getString("education_university", ""));
+            etYear.setText(sharedPreferences.getString("education_year", ""));
+        } else {
+            Log.e("EducationActivity", "One or more EditText fields are null!");
         }
     }
     private void clearAllFields()
@@ -84,6 +79,12 @@ public class EducationActivity extends AppCompatActivity {
         etDegree.setText("");
         etUniversity.setText("");
         etYear.setText("");
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("education_degree");
+        editor.remove("education_university");
+        editor.remove("education_year");
+        editor.apply();
     }
     private void init()
     {
